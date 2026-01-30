@@ -1,85 +1,104 @@
-// app/components/FAQSection.tsx
-
-'use client'; // Penting: karena kita pakai state dan event handler
-
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown, HelpCircle } from "lucide-react";
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const faqs = [
     {
-      question: "What types of projects do you take on?",
-      answer: "We handle a wide range of residential projects including framing, siding, decks, porches, remodeling, and full home builds. We work with homeowners to bring their vision to life."
+      question: "Berapa lama waktu pengerjaan proyek biasanya?",
+      answer:
+        "Waktu pengerjaan bervariasi sesuai lingkup proyek. Pembangunan dek mungkin memakan waktu 1-2 minggu, sementara renovasi total bisa 4-8 minggu. Kami akan memberikan jadwal yang jelas sejak awal.",
     },
     {
-      question: "Do you offer free estimates?",
-      answer: "Yes, we offer free, no-obligation estimates to help you plan and budget your project. Just reach out and we’ll schedule a time to discuss your needs."
+      question: "Apakah ada biaya untuk estimasi/survei lokasi?",
+      answer:
+        "Gratis! Kami menawarkan estimasi tanpa kewajiban apa pun. Kami akan mengunjungi lokasi Anda, mendiskusikan kebutuhan Anda, dan memberikan penawaran rinci.",
     },
     {
-      question: "How long will my project take?",
-      answer: "Project timelines vary depending on scope, size, and weather conditions. After reviewing your plans, we’ll provide a detailed timeline with milestones so you know what to expect."
+      question: "Apakah layanan Anda berlisensi dan bergaransi?",
+      answer:
+        "Tentu saja. Kami memiliki lisensi penuh dan jaminan asuransi untuk melindungi Anda serta properti Anda selama pengerjaan proyek berlangsung.",
     },
     {
-      question: "Can you help with design ideas?",
-      answer: "Absolutely! Our team has years of experience and can offer suggestions, recommend materials, and even connect you with designers if needed to refine your vision."
+      question: "Area mana saja yang Anda layani?",
+      answer:
+        "Kami melayani area operasional kami dan sekitarnya. Hubungi kami untuk memastikan lokasi Anda termasuk dalam jangkauan layanan kami.",
     },
     {
-      question: "Are you licensed and insured?",
-      answer: "Yes, Elite Contractors LLC is fully licensed and insured in Kansas. Your safety and peace of mind are our top priorities."
+      question: "Apakah ada garansi untuk hasil pengerjaan?",
+      answer:
+        "Ya, kami menjamin kualitas pengerjaan kami dengan garansi komprehensif. Syarat dan ketentuan bergantung pada jenis proyek dan material yang digunakan.",
     },
-    {
-      question: "How do I get started?",
-      answer: "Simply click the 'Contact Us' button below or call us directly. We’ll set up a consultation to discuss your goals, provide an estimate, and outline next steps."
-    }
   ];
 
-  const toggleAccordion = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
-    <section className="bg-orange-50 py-16 px-6 md:px-12">
-      <div className="container mx-auto max-w-6xl">
-        <div className="flex flex-col md:flex-row gap-12 items-start">
-
-          {/* Left Column - Title & CTA */}
-          <div className="md:w-1/3">
-            <h2 className="text-4xl font-bold text-gray-800 mb-4">FAQs</h2>
-            <p className="text-gray-600 mb-8">
-              Have questions? Here are some common things homeowners ask before starting a project with us.
+    <section className="w-full bg-white py-20 px-6 md:px-16">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <div className="flex justify-center items-center gap-2 mb-4">
+            <HelpCircle className="text-orange-600" size={20} />
+            <p className="text-sm font-semibold tracking-wide text-orange-700 uppercase">
+              FAQ
             </p>
-            <button className="border border-orange-500 text-orange-500 px-6 py-3 rounded-full font-medium hover:bg-orange-500 hover:text-white transition-colors">
-              Contact Us
-            </button>
           </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#1A1A1A]">
+            Pertanyaan yang <span className="text-orange-600">Sering Diajukan</span>
+          </h2>
+        </motion.div>
 
-          {/* Right Column - Accordion */}
-          <div className="md:w-2/3 space-y-4">
-            {faqs.map((faq, index) => (
-              <div key={index} className="border-b border-gray-300 pb-4">
-                <button
-                  onClick={() => toggleAccordion(index)}
-                  className="flex justify-between items-center w-full text-left text-lg font-semibold text-gray-800 py-3 focus:outline-none"
-                >
+        {/* FAQ Items */}
+        <div className="space-y-4">
+          {faqs.map((faq, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 }}
+              className="border border-gray-200 rounded-xl overflow-hidden bg-white shadow-sm hover:shadow-md transition-shadow"
+            >
+              <button
+                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                className="w-full px-6 py-5 flex justify-between items-center text-left hover:bg-orange-50 transition-colors"
+              >
+                <span className="font-semibold text-[#1A1A1A] pr-4">
                   {faq.question}
-                  <span className={`transition-transform duration-300 ${openIndex === index ? 'rotate-180' : ''}`}>
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </span>
-                </button>
-                <div
-                  className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                    openIndex === index ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
-                  }`}
+                </span>
+                <motion.div
+                  animate={{ rotate: openIndex === index ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="shrink-0"
                 >
-                  <p className="text-gray-600 pt-2 pb-4">{faq.answer}</p>
-                </div>
-              </div>
-            ))}
-          </div>
+                  <ChevronDown className="text-orange-600" size={20} />
+                </motion.div>
+              </button>
 
+              <AnimatePresence>
+                {openIndex === index && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="px-6 pb-5 text-gray-600 border-t border-gray-100 pt-4">
+                      {faq.answer}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

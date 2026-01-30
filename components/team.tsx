@@ -1,78 +1,86 @@
-// app/components/TeamSection.tsx
 "use client";
-import Image from 'next/image';
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { Users } from "lucide-react";
 
 export default function TeamSection() {
-  const teamMembers = [
+  const team = [
     {
-      name: "John Smith",
-      role: "Project Manager",
-      image: "/asset/orang1.jpg"
+      name: "Jim Anderson",
+      role: "Pendiri & Kepala Konstruksi",
+      img: "/asset/data3.jpg",
     },
     {
-      name: "Sarah Wilson",
-      role: "Estimator / Planner",
-      image: "/asset/orang1.jpg"
+      name: "Mike Torres",
+      role: "Manajer Proyek",
+      img: "/asset/data3.jpg",
     },
     {
-      name: "David Clark",
-      role: "Architect",
-      image: "/asset/orang1.jpg"
+      name: "Sarah Chen",
+      role: "Konsultan Desain",
+      img: "/asset/data3.jpg",
     },
-    {
-      name: "James Miller",
-      role: "Construction Manager",
-      image: "/asset/orang1.jpg"
-    }
   ];
 
   return (
-    <section className="bg-black text-white py-16 px-4 md:px-12">
-      {/* Header */}
-      <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 bg-gray-800 px-4 py-1 rounded-full text-xs font-semibold mb-4">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0z" />
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 14a4 4 0 014-4h4M12 14a4 4 0 01-4-4H4M12 14a4 4 0 01-4 4h4M12 14a4 4 0 014 4h4" />
-          </svg>
-          PROFESSIONALS
-        </div>
-        <h2 className="text-4xl font-extrabold text-orange-500 mb-4">OUR TEAM</h2>
-        <p className="text-gray-400 max-w-xl mx-auto">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        </p>
-      </div>
-
-      {/* Team Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        {teamMembers.map((member, index) => (
-          <div key={index} className="text-center group">
-            <div className="relative overflow-hidden rounded-lg mb-4">
-              <Image
-                src={member.image}
-                alt={member.name}
-                width={533}
-                height={300}
-                className="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-105"
-              />
-            </div>
-            <h3 className="text-xl font-bold">{member.name}</h3>
-            <p className="text-gray-400 text-sm mt-1">{member.role}</p>
+    <section className="w-full bg-white py-20 px-6 md:px-16">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <div className="flex justify-center items-center gap-2 mb-4">
+            <Users className="text-orange-600" size={20} />
+            <p className="text-sm font-semibold tracking-wide text-orange-700 uppercase">
+              Tim Kami
+            </p>
           </div>
-        ))}
-      </div>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-[#1A1A1A]">
+            Kenali <span className="text-orange-600">Para Ahli Kami</span>
+          </h2>
+          <p className="mt-4 text-gray-600 max-w-2xl mx-auto">
+            Profesional berpengalaman yang berdedikasi mewujudkan visi Anda menjadi kenyataan
+          </p>
+        </motion.div>
 
-      {/* We're Hiring Section */}
-      <div className="bg-gray-900 rounded-lg p-8 max-w-4xl mx-auto text-center">
-        <h3 className="text-2xl font-bold mb-4">
-          We’re <span className="text-orange-500">hiring!</span>
-        </h3>
-        <p className="text-gray-300 mb-6">
-          Join our team at Elite Contractors. We employ dependable team players who seek long-term employment in the trades.
-        </p>
-        <button className="bg-orange-500 hover:bg-orange-600 text-white px-6 py-3 rounded-full font-medium transition-colors">
-          Apply Now
-        </button>
+        {/* Team Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {team.map((member, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.15, duration: 0.5 }}
+              whileHover={{ y: -10 }}
+              className="group relative bg-white rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+            >
+              {/* Image */}
+              <div className="relative h-80 w-full overflow-hidden">
+                <Image
+                  src={member.img}
+                  alt={member.name}
+                  fill
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
+                />
+                <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent" />
+              </div>
+
+              {/* Info */}
+              <motion.div
+                initial={{ y: 20 }}
+                whileHover={{ y: 0 }}
+                className="absolute bottom-0 left-0 right-0 p-6 text-white"
+              >
+                <h3 className="text-xl font-bold">{member.name}</h3>
+                <p className="text-orange-400 text-sm mt-1">{member.role}</p>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

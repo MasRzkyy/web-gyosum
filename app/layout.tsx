@@ -5,13 +5,14 @@ import "./globals.css";
 import 'remixicon/fonts/remixicon.css'
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
+import SmoothScroll from "@/components/SmoothScroll";
 
 // const poppins = Poppins({
 //   variable: "--font-poppins",
 //   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 // });
 const outfit = Outfit({
-  variable : "--font-outfit",
+  variable: "--font-outfit",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
 })
 
@@ -33,9 +34,11 @@ export default function RootLayout({
       <body
         className={`${outfit.className} antialiased`}
       >
-        <Navbar />
-        {children}
-        <Footer />
+        <SmoothScroll>
+          <Navbar />
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );
