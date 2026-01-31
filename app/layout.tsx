@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-// import {  Poppins } from "next/font/google";
 import { Outfit } from "next/font/google";
 import "./globals.css";
 import 'remixicon/fonts/remixicon.css'
-import Navbar from "@/components/navbar";
-import Footer from "@/components/footer";
-import SmoothScroll from "@/components/SmoothScroll";
 
-// const poppins = Poppins({
-//   variable: "--font-poppins",
-//   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-// });
 const outfit = Outfit({
   variable: "--font-outfit",
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -34,11 +26,7 @@ export default function RootLayout({
       <body
         className={`${outfit.className} antialiased`}
       >
-        <SmoothScroll>
-          <Navbar />
-          {children}
-          <Footer />
-        </SmoothScroll>
+        {children}
       </body>
     </html>
   );
