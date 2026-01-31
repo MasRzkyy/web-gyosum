@@ -155,8 +155,8 @@ export default function Footer() {
             <Link href="#" className="hover:text-orange-400">Pengaturan Cookie</Link>
           </div>
           <p className="text-gray-400">
-            Web Design & Digital Marketing with ❤️ by{' '}
-            <Link href="#" className="text-orange-400 hover:underline">Dotcom Design</Link>
+            Web Design & Digital Marketing by{' '}
+            <Link href="#" className="text-orange-400 hover:underline">The Monarch Design</Link>
           </p>
         </div>
       </div>

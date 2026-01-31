@@ -22,18 +22,18 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const menuItems = [
-    { name: "Beranda", href: "/" },
-    { name: "Tentang Kami", href: "/about" },
-    { name: "Galeri", href: "/gallery" },
-    { name: "Hubungi Kami", href: "/contact" },
-  ];
-
+  
   const serviceItems = [
     { name: "Konstruksi Rangka", href: "/services/framing" },
     { name: "Pemasangan Siding", href: "/services/siding" },
     { name: "Dek Kustom", href: "/services/decks" },
     { name: "Renovasi Rumah", href: "/services/remodeling" },
+  ];
+  const menuItems = [
+    { name: "Beranda", href: "/" },
+    { name: "Tentang Kami", href: "/about" },
+    { name: "Galeri", href: "/gallery" },
+    { name: "Hubungi Kami", href: "/contact" },
   ];
 
   return (
